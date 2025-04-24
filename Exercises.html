@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ 
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <script src="echarts.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d/control_utils_3d.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+
+
+  <title> BurnAI </title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  
+  <link href="css/style.css" rel="stylesheet" />
+  
+  <link href="css/responsive.css" rel="stylesheet" />
+  
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    .header {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .navbar-brand {
+      font-size: 2rem;
+      font-weight: 800;
+      display: inline-block;
+    }
+
+    .navbar-nav {
+      margin-left: auto;
+    }
+
+    .nav-item {
+      margin: 0 10px;
+    }
+
+    .nav-link {
+      color: #333;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-icon {
+      font-size: 0.9rem;
+    }
+
+    .nav-link:hover {
+      color: #e2194f;
+      background-color: rgba(226, 25, 79, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .nav-item.active .nav-link {
+      color: #e2194f;
+      background-color: rgba(226, 25, 79, 0.1);
+    }
+
+    body {
+      padding-top: 76px;
+    }
+
+    #map1{
+      background-color:#e6f2ff;
+    }
+    #map2{
+      background-color:#e6f2ff;
+    }
+    #stats2{
+      background-color:#e6f2ff;
+      height: 400px;
+      width: 100%;
+    }
+    #st3{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      
+    }
+
+    #stats{
+      background-color:#e6f2ff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 200px;
+      width: 100%;
+      
+
+    }
+    #stats3{
+      background-color:#e6f2ff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100px;
+      width: 100%;
+      
+
+    }
+    #acard{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color:#333333;
+    }
+    #mainplot{
+      display: flex;
+      justify-items: center;
+      align-items: center;
+
+    }
+    html{
+      scroll-behavior: smooth;
+    }
+    #btnplacemnet{
+      display: flex;
+      /* align-items: center; */
+      justify-content: center;
+
+    }
+    #endlane{
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      justify-content:space-between;
+    }
+
+    #bo{
+      height: 100px;
+      width:100px;
+      margin-left: 20px;
+    }
+    #maingame{
+      display: flex;
+      /* flex-direction: row; */
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    body{
+      background-color: #f0f8ff;
+    }
+    .heading_container{
+      display:flex;
+      justify-content: center;
+      height: 5px;
+    }
+    .product_section .container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 60px;
+      margin-bottom: 0px;
+        width: 220px;
+        height: 50px;
+        border: none;
+        outline: none;
+        color: #fff;
+        background: #111;
+        cursor: pointer;
+        position:relative;
+        z-index: 0;
+        border-radius: 0px;
+        
+    }
+    #btn2 {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      align-items: center;
+      margin: 20px;
+      /* margin-bottom: 0px; */
+        width: 220px;
+        height: 50px;
+        border: none;
+        outline: none;
+        color: #ffffff;
+        background: #0066cc;
+        cursor: pointer;
+        position:relative;
+        z-index: 0;
+        border-radius: 25px;
+        
+    }
+    h4{
+      color:#333333;
+    }
+
+    #btn:before {
+        content: '';
+        /* background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000); */
+        background: linear-gradient(60deg, #48ff00,#c3f21a, #00ffd5, #002bff, #0077ff,#48ff00);
+        position: absolute;
+        top: -2px;
+        left:-2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        border-radius: 0px;
+    }
+    #exerbgshift{
+      width:100%;
+      height:150px;
+      background: linear-gradient(180deg, #f0f8ff, #e6f2ff);
+    }
+    #btn2:before {
+        content: '';
+        /* background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000); */
+        background: linear-gradient(45deg, #e2194f, #ff3366, #e2194f);
+        position: absolute;
+        top: -2px;
+        left:-2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        border-radius: 25px;
+    }
+
+    #btn:active {
+        color: rgb(140, 140, 140)
+    }
+
+    #btn:active:after {
+        background: transparent;
+    }
+
+    #btn:hover:before {
+        opacity: 1;
+    }
+    #btn2:active {
+        color: #000
+    }
+
+    #btn2:active:after {
+        background: transparent;
+    }
+
+    #btn2:hover:before {
+        opacity: 1;
+    }
+
+    #btn:after {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #111;
+        left: 0;
+        top: 0;
+        border-radius: 0px;
+    }
+    #btn2:after {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #0066cc;
+        left: 0;
+        top: 0;
+        border-radius: 25px;
+    }
+
+    @keyframes glowing {
+        0% { background-position: 0 0; }
+        50% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
+    }
+    #myProgress {
+      margin-right: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+      display: flex;
+      height: 619px;
+      display: flex;
+      background-color: #e6f2ff;
+    }
+    #myBar {
+      display: flex;
+      width: 40px;
+      height:99%;
+      background-color: #e6f2ff;
+    }
+    #myBar2 {
+      width: 40px;
+      height:619px;
+      background-color: #4f95ff;
+    }
+    #landmark-grid-container{
+      height: 400px;
+      width: 400px;
+    }
+    .viewer-widget-js canvas{
+      height: 80px;
+      background-color: #e6f2ff;
+      margin:0px;
+      width: 80px;
+    }
+    .output_canvas{
+      background-color: #f0f8ff;
+      height:619px;
+      width:1100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hpro{
+      color: #333333;
+    }
+    .hpro1 {
+      color: #ffffff;
+    }
+    .l{
+      color: #333333;
+    }
+  </style>
+
+</head>
+
+<body class="sub_page">
+
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">
+          <span style="color: #333333;">Burn</span><span style="color: #e2194f;">AI</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <i class="fas fa-home nav-icon"></i> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">
+                <i class="fas fa-info-circle nav-icon"></i> About
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="Info.html">
+                <i class="fas fa-dumbbell nav-icon"></i> Exercises <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="product_section ">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2 id="time">
+          Dumbell Curl
+        </h2>
+      </div>
+      
+
+      <a href="#maingame2"><button id="btn">Start</button></a>
+
+      
+      
+    </div>
+  </section>
+
+  <div id="" class="container">
+
+    <div class="details">
+      <section id="maingame2">
+        <br>
+      <section id="maingame">
+
+        
+        <video class="input_video" height="0" width="0"></video>
+        <div id="myProgress">
+          <div id="myBar2">
+            <div id="myBar"></div>
+          </div>
+        
+        </div>
+      
+        <canvas class="output_canvas" id="output_canvas" width="1200px" height="675px"></canvas>
+      </section>
+    </section>
+      <div id="endlane">
+      
+        <div class="landmark-grid-container"></div>
+
+        <div>
+          <a href="#analysis"><button id="btn2"><h2><strong class="hpro1">End</strong></h2></button></a>
+        </div>
+        <div id="bo">
+          <br><h5 class="hpro" >Calibrated : <strong class="hpro12" id="text2">NO</strong></h5>
+        </div>
+        <div class="stats">
+          <div><br><h4>Angle : <strong class="l" id="text"> . </strong></h4></div>
+          <h2 class="hpro">Rep Count :<strong class="l" id="rep"> . </strong></h2>
+        </div>
+
+        
+      </div>
+    </div>
+      
+    </div>
+
+  </div>
+  <section id="analysis">
+    <div id="exerbgshift">
+      <br>
+      <h2 id="acard"></h2>
+    </div>
+    <div id="mainplot">
+      <div id="map1" style="width: 1500px;height:600px;"></div>
+      <div id="map2" style="width: 1500px;height:600px;"></div>
+    </div>
+    <div id="stats2">
+      <div id="stats">
+        <div id="st1" class="hprog"></div>
+        <div id="st2" class="hprog"></div>
+        
+      </div>
+      <div id="stats3">
+        <div id="st3" class="hprog"></div>
+        <div id="st4" class="hprog"></div>
+        
+      </div>
+    </div>
+    
+    
+  </section>
+
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        © All Rights Reserved By
+        <a href="">Raspy</a>
+      </p>
+    </div>
+  </footer>
+ 
+
+
+</body>
+
+</html>
+<script>
+  // import * as echarts from 'echarts';
+
+
+  function main(){  
+    var btn=document.querySelector('#btn');
+    var rep_track=[];
+    var repsum=0;
+    var calibrate=1;
+    var repcount=[];
+    var set_track=[];
+    var trepsum=0;
+    var exi=0;
+    var tts= window.speechSynthesis;
+    var count=0;
+    var cflag=-1;
+    var shouldererror=0;
+    var today=new Date();
+    console.log("exi==0",exi," ",today);
+    
+    btn.addEventListener('click',()=>{
+      // trigger the exercise with a start button on the same page and then 
+      
+      var tos = new SpeechSynthesisUtterance(" Configuring Files,and; Initiating program,. Kindly Keep Your right Arm straight during calibration. Thank you!");
+      tts.speak(tos);
+      console.log("Process started");
+            
+      // var cflag=-1;
+              
+      const videoElement = document.getElementsByClassName('input_video')[0];
+      const canvasElement = document.getElementsByClassName('output_canvas')[0];
+      const canvasCtx = canvasElement.getContext('2d');
+      const landmarkContainer = document.getElementsByClassName('landmark-grid-container')[0];
+      const grid = new LandmarkGrid(landmarkContainer);
+
+      var upflag=-1;
+
+      var temp=0;
+      var downflag=-1;
+
+      var rep=0;
+      var countup=0;
+      var repsum=0;
+      var dict={};
+    
+      var countdown=0;
+      var scount=0;
+      //time based
+      var end_tsecs=-1;
+      var tsecs=-1;
+      
+      var total_secs_start=0;
+      
+      console.log("hello");
+      
+      btn2.addEventListener('click',()=>{
+        var today2=new Date();
+        end_tsecs=((today2.getMinutes())*60)+((today.getHours())*3600)+today2.getSeconds();
+        tsecs=end_tsecs-total_secs_start;
+        console.log("tsecs"+tsecs+" cf"+cflag+" count "+count+" start sec "+total_secs_start+" end sec  "+end_tsecs);
+        // camera.close();
+        exi++;
+        cflag=-1;
+        calibrate=0;
+        
+
+      })
+
+      grid.width=1000;
+      // grid.height=400;
+      // grid.width=400;
+      function mod(a){
+        let r=Math.sqrt((a[0]*a[0])+(a[1]*a[1]));
+        return r;
+      }
+      function dot(a,b){
+        let r=((a[0]*b[0])+(a[1]*b[1]));
+        return r;
+      }
+      function calcangle(a,b,c){//up to down from shoulder
+        
+        let v1=[a.x-b.x,a.y-b.y];
+        let v2=[c.x-b.x,c.y-b.y];
+        
+        
+        let radians = Math.acos(dot(v1,v2)/((mod(v1))*(mod(v2))));
+
+        
+        let angle = (radians * 180 / Math.PI); 
+
+        if(angle > 180.0){
+            angle = 360 - angle;
+        }
+        var i = 0;
+        function move() {
+          if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("myBar");
+            var width = 0;
+            var id = setInterval(frame, 30);
+            function frame() {
+              if (width >= 100) {
+                // clearInterval(id);
+                i = 0;
+              } else {
+                if(cflag!=-1){
+                  elem.style.height = (((angle*100)/180)) + "%";
+                }
+              }
+              clearInterval(id);
+            }
+          }
+        }
+        move();     
+        return angle;
+      }
+
+    
+      function onResults(results) {
+        if (!results.poseLandmarks) {
+          grid.updateLandmarks([]);
+          return;
+        }
+        
+        if(exi==1){
+          document.getElementById("acard").innerHTML="Analysis";
+          document.getElementById("st1").innerHTML="Errors during Session: "+shouldererror;
+          document.getElementById("st2").innerHTML="Totals reps: "+rep;
+          document.getElementById("st3").innerHTML="Time Taken: "+tsecs+" seconds";
+          
+
+
+          cflag=-1;
+          temp=Math.trunc(rep/5);
+          document.getElementById("st4").innerHTML="Totals Sets (5 reps) : "+temp;
+            console.log("im in"+temp);
+            for(var i=0;i<temp;i++){
+              trepsum=0;
+              for(var j=0;j<5;j++){
+                if(j+i*5==0){
+                  trepsum=trepsum+rep_track[j+i*5]-rep_track[0];
+                }
+                else{
+                  trepsum=trepsum+rep_track[j+i*5];
+                }
+              }
+             
+              set_track.push({"value":trepsum,"name":"Set Number: "+(i+1)});
+
+            }
+
+
+          console.log(" "+rep_track+" "+repcount);
+          dt=['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+          var graph = echarts.init(document.getElementById('map1'));
+          option = {
+              backgroundColor:'#e6f2ff',
+              legend: {
+                textStyle: {
+                  color: '#333333'
+                }
+              },
+              xAxis: [
+                  {
+                      type: 'category',
+                      axisTick: {
+                          alignWithLabel: true
+                      },
+                      axisLabel: {
+                        color: '#333333'
+                      },
+                      data: repcount.slice(1),
+                  }
+              ],
+              yAxis: [
+                  
+                  {
+                      type: 'value', name: 'Rep Time', min: 0, max: 100, position: 'right',
+                      axisLabel: { formatter: '{value} second', color: '#333333' },
+                      nameTextStyle: { color: '#333333' }
+                  },
+                  {
+                      type: 'value', name: 'Rep Time', min: 0, max: 100, position: 'left',
+                      axisLabel: { formatter: '{value}', color: '#333333' },
+                      nameTextStyle: { color: '#333333' }
+                  }
+              ],
+              series: [
+                  // {
+                  //     name: 'Evaporation', type: 'bar', yAxisIndex: 0, data: [0.3, 0.6, 1, 2.4, 2.5, 7.6, 13.5]
+                  // },
+                  {
+                      name: 'time per rep', type: 'bar', smooth: true, yAxisIndex: 1, data:rep_track.slice(1)
+                  },
+                  {
+                      name: 'time per rep', type: 'line', smooth: false, data: rep_track.slice(1)
+                  }
+              ]
+          };
+
+
+          graph.setOption(option);
+
+          var graph2 = echarts.init(document.getElementById('map2'));
+//           var chartDom = document.getElementById('map2');
+// var myChart = echarts.init(chartDom);
+// var option2;
+option2 = {
+  backgroundColor: '#e6f2ff',
+  title: {
+    text: 'Rep Time per Set',
+    left: 'center',
+    top: 20,
+    textStyle: {
+      color: '#333333'
+    }
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  visualMap: {
+    show: false,
+    min: 80,
+    max: 600,
+    inRange: {
+      colorLightness: [0, 1]
+    }
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: '55%',
+      center: ['50%', '50%'],
+      data: set_track.sort(function (a, b) {
+        return a.value - b.value;
+      }),
+      roseType: 'radius',
+      label: {
+        color: 'rgba(0, 0, 0, 0.7)'
+      },
+      labelLine: {
+        lineStyle: {
+          color: 'rgba(0, 0, 0, 0.7)'
+        },
+        smooth: 0.2,
+        length: 10,
+        length2: 20
+      },
+      itemStyle: {
+        color: '#c23531',
+        shadowBlur: 200,
+        shadowColor: 'rgba(0, 0, 0, 0.5)'
+      }
+      ,animationDuration:1000,
+      animationType: 'scale',
+      animationEasing: 'elasticOut',
+      // animationDelay: function (idx) {
+      //   return Math.random() * 200;
+      // }
+    }
+  ]
+};
+
+graph2.setOption(option2);
+
+exi++;
+
+
+        }
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        
+        canvasCtx.globalCompositeOperation = 'source-in';//brings video on screen and takes it off screen 
+        
+
+        canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+      
+        
+        canvasCtx.globalCompositeOperation = 'destination-atop';
+        canvasCtx.drawImage(
+            results.image, 0, 0, canvasElement.width, canvasElement.height);
+    
+        canvasCtx.globalCompositeOperation = 'source-over';
+        drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
+                      {color: '#0066cc', lineWidth: 4});
+        drawLandmarks(canvasCtx, results.poseLandmarks,
+                      {color: '#ff4d4d', lineWidth: 2});
+        canvasCtx.restore();
+      
+        grid.updateLandmarks(results.poseWorldLandmarks);
+        //console.log(results.poseLandmarks[16]);
+
+        let pirn="";
+        let shoulder=calcangle(results.poseLandmarks[11],results.poseLandmarks[12],results.poseLandmarks[14]);
+        let pin=calcangle(results.poseLandmarks[12],results.poseLandmarks[14],results.poseLandmarks[16]);
+        if(calibrate==1){
+        document.getElementById("text").innerHTML = Math.trunc(pin);
+        }
+        // console.log("Final Check "+shoulder);
+
+        if(pin>165){
+          count++;
+          if(cflag==-1&&calibrate==1){
+            
+            document.getElementById("text2").innerHTML = "Calibrating " + (count/4)+" %";
+            document.getElementById("text2").style.color="blue";
+            document.getElementById("text2").style.fontSize="medium";
+            
+
+          }
+        }
+  
+        if(count%400==0&&cflag==-1&&count!=0&&calibrate==1){
+          cflag=0;
+          document.getElementById("text2").innerHTML = "Yes";
+          document.getElementById("text2").style.color="green";
+          document.getElementById("text2").style.fontSize="large";
+          var tos = new SpeechSynthesisUtterance("Calibration Succesful");
+          tts.speak(tos);
+          
+
+
+        }
+        
+        if(shoulder>120 && cflag!=-1){
+          scount++;
+        }
+        if(pin>150 && cflag!=-1){
+          // countdown++;
+          cflag=0;//down
+        }
+        if(cflag!=-1&&tsecs==-1){
+          total_secs_start=((today.getMinutes())*60)+((today.getHours())*3600)+today.getSeconds();
+          tsecs=0;
+          console.log("hello"+total_secs_start);
+        }
+        if(pin<25){
+          // countup++;
+          // cflag=1;//up
+        }
+
+        if(cflag==0 && pin<25 && shoulder>90 && shoulder<110){
+          
+          // upflag=0;
+          // downflag=0;
+          var today21=new Date();
+          var end_tsecs2=(((today21.getHours())*3600)+(today21.getMinutes())*60)+today21.getSeconds();
+          cflag=1;
+          rep_track[0]=end_tsecs2-total_secs_start;
+          repcount[0]=0;
+          rep++;
+          repsum=repsum+rep_track[rep-1];
+          
+          var tsecs2=end_tsecs2-total_secs_start-repsum;
+          
+
+          
+        // console.log("tsecs"+tsecs+" cf"+cflag+" count "+count+" start sec "+total_secs_start+" end sec  "+end_tsecs);
+
+          
+          repcount[rep]=rep;
+          rep_track[rep]=tsecs2;
+          document.getElementById("rep").innerHTML = Math.trunc(rep);
+          
+        }
+
+        if(shoulder>120 && cflag!=-1 &&scount%100==0){
+          shouldererror++;
+          var tos = new SpeechSynthesisUtterance("Please bring your Arms Closer to your Waist");
+          tts.speak(tos);
+          
+        }
+      
+      }
+    
+      const pose = new Pose({locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+      }});
+      pose.setOptions({
+        modelComplexity: 1,
+        smoothLandmarks: true,
+        enableSegmentation: true,
+        smoothSegmentation: true,
+        minDetectionConfidence: 0.8,
+        minTrackingConfidence: 0.8
+      });
+      pose.onResults(onResults);
+      
+      const camera = new Camera(videoElement, {
+        onFrame: async () => {
+          await pose.send({image: videoElement});
+        },
+        width: 320,
+        height: 180
+      });
+      camera.start();
+      console.log("end o after cam")
+      
+      
+    })
+    console.log("exiiii"+exi);
+    if(exi==1){
+      console.log("are u here?")
+      return;
+    }
+  }
+  main();
+  </script>

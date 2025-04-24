@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+ 
+
+  <title> BurnAI </title>
+
+
+  
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  
+  <link href="css/style.css" rel="stylesheet" />
+  
+  <link href="css/responsive.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    /* Additional modern header styles */
+    .header {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .navbar-brand {
+      font-size: 2rem;
+      font-weight: 800;
+      display: inline-block;
+    }
+
+    .navbar-nav {
+      margin-left: auto;
+    }
+
+    .nav-item {
+      margin: 0 10px;
+    }
+
+    .nav-link {
+      color: #333;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-icon {
+      font-size: 0.9rem;
+    }
+
+    .nav-link:hover {
+      color: #e2194f;
+      background-color: rgba(226, 25, 79, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .nav-item.active .nav-link {
+      color: #e2194f;
+      background-color: rgba(226, 25, 79, 0.1);
+    }
+
+    body {
+      padding-top: 76px;
+    }
+
+    /* Footer Styles */
+    .footer_section {
+      background-color: #171830;
+      color: #ffffff;
+      padding: 70px 0 20px;
+      position: relative;
+    }
+
+    .footer_section:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDE0NDAgMTQ0IiBmaWxsPSJub25lIj48cGF0aCBkPSJNMCAwSDE0NDBWMTEyQzEyMzIgMTQ0IDExNTIgMTEyIDk2MCAxMTJDNzY4IDExMiA3MjAgMTQ0IDQ4MCAxNDRDMjQwIDE0NCAxOTIgMTEyIDAgMTEyVjBaIiBmaWxsPSIjMGM3MWM3IiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=');
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .footer-brand {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .footer_section h5 {
+      color: #fff;
+      margin-bottom: 25px;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 15px;
+      font-size: 1.2rem;
+      display: inline-block;
+    }
+
+    .footer_section h5:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: #e2194f;
+      border-radius: 50px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255,255,255,0.1);
+      color: #ffffff;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background-color: #e2194f;
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 15px;
+    }
+
+    .footer-links a {
+      color: #a8a8b3;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .footer-links a:before {
+      content: '→';
+      margin-right: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      transform: translateX(5px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 50px;
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      color: #a8a8b3;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">
+          <span style="color: #333333;">Burn</span><span style="color: #e2194f;">AI</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <i class="fas fa-home nav-icon"></i> Home
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="about.html">
+                <i class="fas fa-info-circle nav-icon"></i> About <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Info.html">
+                <i class="fas fa-dumbbell nav-icon"></i> Exercises
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      
+    </div>
+    
+  
+    
+  </div>
+
+
+  <section class="about_section about_section1 layout_padding">
+    <div class="container  ">
+      <div class="row">
+        <div class="col-md-612">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                The Project
+              </h2>
+            </div>
+            <p>
+              <strong class="l">BurnAI</strong> is more than just a fitness tracker—it's your personal guide to safe and effective home workouts. Powered by advanced computer vision, it ensures you maintain the right posture, reducing the risk of injuries while maximizing results.
+
+              This project was born from a personal fitness journey—shedding 15kg and realizing firsthand the challenges of working out without guidance. The struggle of maintaining proper form, avoiding injuries, and staying consistent inspired the creation of burnAI. It's designed to empower anyone, regardless of experience, to exercise confidently and safely from home.
+              
+              Whether you're a beginner or a seasoned fitness enthusiast, burnAI is here to support your journey, helping you train smarter and achieve your goals with precision and ease.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-612 ">
+          <div class="img-box">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+  <section class="info_section">
+    <div class="container">
+      <div class="row info_main_row">
+        <div class="col-md-61 info_col">
+          <h5>
+            About <span class="l">Us</span>
+          </h5>
+          <p>
+            Just some random people trying to build things and explore new ideas :)
+          </p>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="footer-brand">
+            <span style="color: #ffffff;">Burn</span><span style="color: #e2194f;">AI</span>
+          </div>
+          <p style="color: #a8a8b3; margin-bottom: 30px;">Your everyday workout companion powered by AI</p>
+        </div>
+        <div class="col-md-4">
+          <h5>About Us</h5>
+          <p>Just some random people trying to build things and explore new ideas :)</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="Info.html">Exercises</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 All Rights Reserved By RASPY</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.getElementById('displayYear').innerText = new Date().getFullYear();
+    
+    // Initialize AOS animations
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init();
+    });
+  </script>
+</body>
+
+</html>
